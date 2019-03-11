@@ -97,6 +97,11 @@ window.onload = function() {
     $(".color").appendChild(shoe.colour);
     $(".price").appendChild(shoe.code + "|" + shoe.avaliable + "|" + shoe.price);
 
+    var cerrado = "CLOSED";
+    var abierto = "ENTER RAFFLE";
+    var noAbierto = "ANNOUNCED";
+    var suscribirte = "Mark as entered";
+    var eliminarSuscripcion = "Entered";
 
     var rifas = JSON.parse(raffles);
 
@@ -108,16 +113,30 @@ window.onload = function() {
     "<p>" + rifas[i].collection + "</p>" +
     "<p>" + rifas[i].Sizes + "</p>" +
     "<p>" + rifas[i].Opens + "</p>" +
-    "<p>" + rifas[i].Closes + "</p>" +
-    "<button class='botonRifa'>" + rifas[i].purchase + "</button></li>";
+    "<p>" + rifas[i].Closes + "</p>"
+    
+    if (rifas[i].Opens == "closed") {
+        + "<button style='background-color: red;'  href=' " + rifas[i].url + "' class='botonRifa'>" + cerrado + "</button></li>";
+    } else if (rifas[i].Opens == "announced") {
+        + "<button style='background-color: gray;'  href=' " + rifas[i].url + "' class='botonRifa'>" + noAbierto + "</button></li>";
+    } else {
+        + "<button style='background-color: green;' href=' " + rifas[i].url + "' class='botonRifa'>" + abierto + "</button></li>";
     }
 
+    + "<p class='suscribirte'>" + suscribirte + "</p>"
+}
+
     $(".container-rifas").innerHTML = "<ul>" + list + "</ul>"; 
- 
-    $(".botonRifa").on('click', function() {
-        $(this).css("background-color", "red");
-        $(this).appendChild("CLOSED");
-    });
+
+    if($(".suscribirte").val() == suscribirte) {
+        $(".suscribirte").val().delete();
+        $(".suscribirte").appendChild(eliminarSuscripcion);
+    } else {
+        $(".suscribirte").val().delete();
+        $(".suscribirte").appendChild(suscribirte);
+    }
+
+    var suscripcionGuardada = localStorage.list;
 }
 
 
