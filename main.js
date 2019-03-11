@@ -136,7 +136,17 @@ window.onload = function() {
         $(".suscribirte").appendChild(suscribirte);
     }
 
-    var suscripcionGuardada = localStorage.list;
+    localStorage.setItem([rifas]);
+
+    for (rifas in localStorage) {
+        var value = localStorage[rifas];
+        localStorage.setItem([rifas]);
+    }
+
+    for(var i = 0; i < localStorage.length; i++) {
+        var name = localStorage.key(i);
+        var value = localStorage.getItem(name);
+    }
 }
 
 
